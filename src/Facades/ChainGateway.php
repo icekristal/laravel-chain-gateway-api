@@ -29,7 +29,8 @@ use Illuminate\Support\Facades\Facade;
  * @method static ChainGatewayApi unSubscribeBEP20Address(string $addressFrom, string $url)
  * @method static ChainGatewayApi subscribeBNBList()
  * @method static ChainGatewayApi getBNBTransaction(string $tXId)
- * @method static ChainGatewayApi send($type, string $from, string $privateKey, float $amount, string $to)
+ * @method static ChainGatewayApi send($type, string $from, string $privateKey, float $amount, string $addressTo)
+ * @method static ChainGatewayApi balance($type, string $address)
  */
 class ChainGateway extends Facade
 {
