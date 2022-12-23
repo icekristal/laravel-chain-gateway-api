@@ -1,0 +1,32 @@
+{
+    "name": "icekristal/laravel-chain-gateway-api",
+    "description": "Laravel ChainGateway service api",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "icekristal",
+            "email": "savatneev-anton@mail.ru"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.0",
+        "laravel/framework": "^8|^9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Icekristal\\LaravelChainGatewayApi\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Icekristal\\LaravelChainGatewayApi\\ChainGatewayApiServiceProvider"
+            ],
+            "aliases": {
+                "ChainGateway": "Icekristal\\LaravelChainGatewayApi\\Facades\\ChainGateway"
+            }
+        }
+    }
+}
