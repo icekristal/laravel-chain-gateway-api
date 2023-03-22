@@ -8,7 +8,7 @@ Tron: https://chaingateway.io/docs-tron
 
 BNB: https://chaingateway.io/docs-binance-smart-chain
 
-Add to config services.php
+Add to config services.php !! version 1
 ```php
     'chain_gateway' => [
         'api' => env('CHAIN_GATEWAY_API', null), //API key chain gateway
@@ -23,6 +23,22 @@ Add to config services.php
     ],
 ```
 
+Add to config services.php !! version 2
+```php
+    'chain_gateway' => [
+        'version_api' => env('CHAIN_GATEWAY_API', 'v2'),
+        'api' => env('CHAIN_GATEWAY_API', null),
+        'token_trc20' => env('CHAIN_GATEWAY_TOKEN_TRC20', null),
+        'token_bep20' => env('CHAIN_GATEWAY_TOKEN_BEP20', null),
+        'logging' => [
+            'is_enable' => env('CHAIN_GATEWAY_LOGGING_IS_ENABLE', false),
+            'channel_wallet' => env('CHAIN_GATEWAY_LOGGING_WALLET', 'single'),
+            'channel_sended' => env('CHAIN_GATEWAY_LOGGING_SENDED', 'single'),
+            'channel_received' => env('CHAIN_GATEWAY_LOGGING_RECEIVED', 'single'),
+        ],
+    ],
+```
+
 Methods:
 
 Create addresses
@@ -33,10 +49,10 @@ $result = ChainGateway::createNewWalletBNB(); // BNB address
 
 Subscribe addresses
 ```php
-$result = ChainGateway::subscribeTronAddress(string $addressFrom, string $hex); // For trx transactions
-$result = ChainGateway::subscribeTRC20Address(string $addressFrom, string $hex); // For trc20 transactions
-$result = ChainGateway::subscribeBNBAddress(string $addressFrom, string $hex); // For bnb transactions
-$result = ChainGateway::subscribeBEP20Address(string $addressFrom, string $hex); // For bnb transactions
+$result = ChainGateway::subscribeTronAddress(string $addressFrom, string $url); // For trx transactions
+$result = ChainGateway::subscribeTRC20Address(string $addressFrom, string $hex); // For trc20 transactions - only version 1
+$result = ChainGateway::subscribeBNBAddress(string $addressFrom, string $url); // For bnb transactions
+$result = ChainGateway::subscribeBEP20Address(string $addressFrom, string $hex); // For bnb transactions - only version 1
 ```
 
 Subscribe list
@@ -45,12 +61,18 @@ $result = ChainGateway::subscribeTronList(); // Tron
 $result = ChainGateway::subscribeBNBList(); // Bnb
 ```
 
-unsubscribe addresses
+unsubscribe addresses !! version 1
 ```php
 $result = ChainGateway::unSubscribeTronAddress(string $addressFrom, string $url); // For trx transactions
 $result = ChainGateway::unSubscribeTRC20Address(string $addressFrom, string $url); // For trc20 transactions
-$result = ChainGateway::unSubscribeBNBAddress(string $addressFrom, string $url); // For bnb transactions
+$result = ChainGateway::unSubscribeBNBAddress(string $addressFrom, string $url); // For bnb transactions 
 $result = ChainGateway::unSubscribeBEP20Address(string $addressFrom, string $url); // For bnb transactions
+```
+
+unsubscribe addresses !! version 2
+```php
+$result = ChainGateway::unSubscribeTronAddress(string $webhookId); // For trx transactions
+$result = ChainGateway::unSubscribeBNBAddress(string $webhookId); // For bnb transactions 
 ```
 
 list transactions
