@@ -19,12 +19,6 @@ trait BSC
      */
     public mixed $tokenBEP20 = null;
 
-    public function __construct()
-    {
-        $this->bscUrl = "https://api.chaingateway.io/v2/bsc";
-        $this->tokenBEP20 = config('services.chain_gateway.token_bep20');
-    }
-
     /**
      * Creates a new wallet
      *

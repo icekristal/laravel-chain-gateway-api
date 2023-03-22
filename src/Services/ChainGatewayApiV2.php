@@ -33,6 +33,12 @@ class ChainGatewayApiV2
     public function __construct()
     {
         $this->key = config('services.chain_gateway.api');
+
+        $this->tronUrl = "https://api.chaingateway.io/v2/tron";
+        $this->tokenTRC20 = config('services.chain_gateway.token_trc20');
+        $this->bscUrl = "https://api.chaingateway.io/v2/bsc";
+        $this->tokenBEP20 = config('services.chain_gateway.token_bep20');
+
         $this->channelLogWallets = config('services.chain_gateway.logging.channel_wallet') ?? 'single';
         $this->channelLogSended = config('services.chain_gateway.logging.channel_sended') ?? 'single';
         $this->channelLogReceived = config('services.chain_gateway.logging.channel_received') ?? 'single';
@@ -43,9 +49,9 @@ class ChainGatewayApiV2
      * @param $typeCrypto
      * @param $typeSend
      * @param array $param
-     * @return array
+     * @return array|null
      */
-    private function sendRequest($typeCrypto, $typeSend, array $param = []): array
+    private function sendRequest($typeCrypto, $typeSend, array $param = []): array|null
     {
         $http = Http::withHeaders(
             [
@@ -59,16 +65,18 @@ class ChainGatewayApiV2
             default => null
         };
 
+        $resultUrl = $url . $this->pathUrl;
+
         $request = match ($typeSend) {
-            'delete' => $http->delete($url . $this->pathUrl, $param)->json(),
-            'get' => $http->get($url . $this->pathUrl, $param)->json(),
-            'post' => $http->post($url . $this->pathUrl, $param)->json(),
+            'delete' => $http->delete($resultUrl, $param)->json(),
+            'get' => $http->get($resultUrl, $param)->json(),
+            'post' => $http->post($resultUrl, $param)->json(),
             default => []
         };
 
         $this->saveLogs([
             'type_crypto' => $typeCrypto,
-            'url' => $url,
+            'url' => $resultUrl,
             'type_send' => $typeSend,
             'params' => $param,
         ], $request);

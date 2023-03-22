@@ -18,12 +18,6 @@ trait Tron
      */
     public mixed $tokenTRC20 = null;
 
-    public function __construct()
-    {
-        $this->tronUrl = "https://api.chaingateway.io/v2/tron";
-        $this->tokenTRC20 = config('services.chain_gateway.token_trc20');
-    }
-
     /**
      * Creates a new wallet
      *
