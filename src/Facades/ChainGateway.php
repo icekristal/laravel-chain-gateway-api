@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static ChainGatewayApiV2 deleteWalletBNB(string $address, string $password)
  * @method static ChainGatewayApi|ChainGatewayApiV2 getBNBBalance(string $address)
  * @method static ChainGatewayApi|ChainGatewayApiV2 getBEP20Balance(string $address)
- * @method static ChainGatewayApi|ChainGatewayApiV2 sendBEP20(string $addressFrom, string $privateKey, float $amount, string $addressTo, float $gas)
+ * @method static ChainGatewayApi|ChainGatewayApiV2 sendBEP20(string $addressFrom, string $privateKey, float $amount, string $addressTo, float $gas = 0)
  * @method static ChainGatewayApi|ChainGatewayApiV2 sendBNB(string $addressFrom, string $privateKey, float $amount, string $addressTo)
  * @method static ChainGatewayApi|ChainGatewayApiV2 subscribeBNBAddress(string $addressFrom, string $url)
  * @method static ChainGatewayApi subscribeBEP20Address(string $addressFrom, string $hex)

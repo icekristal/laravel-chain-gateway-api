@@ -88,7 +88,7 @@ trait BSC
      * @param float $gas
      * @return array
      */
-    public function sendBEP20(string $from, string $privateKey, float $amount, string $to, float $gas): array
+    public function sendBEP20(string $from, string $privateKey, float $amount, string $to, float $gas = 0): array
     {
         $this->pathUrl = '/transactions/bep20';
         return $this->sendRequest(self::TYPE_BSC, 'post', [
@@ -97,7 +97,7 @@ trait BSC
             'to' => $to,
             'password' => $privateKey,
             'amount' => number_format($amount, 8, '.', ''),
-            'gas' => $gas
+            'gas' => $gas ?? 0
         ]);
     }
 
