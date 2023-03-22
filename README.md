@@ -26,7 +26,7 @@ Add to config services.php !! version 1
 Add to config services.php !! version 2
 ```php
     'chain_gateway' => [
-        'version_api' => env('CHAIN_GATEWAY_API', 'v2'),
+        'version_api' => env('CHAIN_GATEWAY_API_VERSION', 'v2'),
         'api' => env('CHAIN_GATEWAY_API', null),
         'token_trc20' => env('CHAIN_GATEWAY_TOKEN_TRC20', null),
         'token_bep20' => env('CHAIN_GATEWAY_TOKEN_BEP20', null),
