@@ -19,7 +19,8 @@ use Illuminate\Support\Facades\Facade;
  * @method static ChainGatewayApi unSubscribeTRC20Address(string $addressFrom, string $url)
  * @method static ChainGatewayApi|ChainGatewayApiV2 subscribeTronList()
  * @method static ChainGatewayApi|ChainGatewayApiV2 getTronTransaction(string $tXId)
- * @method static ChainGatewayApi|ChainGatewayApiV2 createNewWalletBNB()
+ *
+ * @method static ChainGatewayApi|ChainGatewayApiV2 createNewWalletBNB(string $password)
  * @method static ChainGatewayApiV2 deleteWalletBNB(string $address, string $password)
  * @method static ChainGatewayApi|ChainGatewayApiV2 getBNBBalance(string $address)
  * @method static ChainGatewayApi|ChainGatewayApiV2 getBEP20Balance(string $address)
@@ -31,6 +32,18 @@ use Illuminate\Support\Facades\Facade;
  * @method static ChainGatewayApi unSubscribeBEP20Address(string $addressFrom, string $url)
  * @method static ChainGatewayApi|ChainGatewayApiV2 subscribeBNBList()
  * @method static ChainGatewayApi|ChainGatewayApiV2 getBNBTransaction(string $tXId)
+ *
+ * @method static ChainGatewayApi|ChainGatewayApiV2 createNewWalletEthereum(string $password)
+ * @method static ChainGatewayApiV2 deleteWalletEthereum(string $address, string $password)
+ * @method static ChainGatewayApi|ChainGatewayApiV2 getEthereumBalance(string $address)
+ * @method static ChainGatewayApi|ChainGatewayApiV2 getERC20Balance(string $address)
+ * @method static ChainGatewayApi|ChainGatewayApiV2 sendERC20(string $addressFrom, string $privateKey, float $amount, string $addressTo)
+ * @method static ChainGatewayApi|ChainGatewayApiV2 sendEthereum(string $addressFrom, string $privateKey, float $amount, string $addressTo)
+ * @method static ChainGatewayApi|ChainGatewayApiV2 subscribeEthereumAddress(string $addressFrom, string $url)
+ * @method static ChainGatewayApi|ChainGatewayApiV2 unSubscribeEthereumAddress(string $webhookId)
+ * @method static ChainGatewayApi|ChainGatewayApiV2 subscribeEthereumList()
+ * @method static ChainGatewayApi|ChainGatewayApiV2 getEthereumTransaction(string $tXId)
+ *
  * @method static ChainGatewayApi|ChainGatewayApiV2 send($type, string $from, string $privateKey, float $amount, string $addressTo)
  * @method static ChainGatewayApi|ChainGatewayApiV2 balance($type, string $address)
  */
