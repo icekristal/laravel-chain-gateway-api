@@ -126,7 +126,8 @@ trait Ethereum
     {
         $this->pathUrl = '/webhooks';
         return $this->sendRequest(self::TYPE_ETHEREUM, 'post', [
-            'binancecoinaddress' => $address,
+            'ethereumaddress' => $address,
+            'contractaddress' => $this->tokenERC20,
             'url' => $url
         ]);
     }

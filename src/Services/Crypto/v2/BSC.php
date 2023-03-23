@@ -127,6 +127,7 @@ trait BSC
         $this->pathUrl = '/webhooks';
         return $this->sendRequest(self::TYPE_BSC, 'post', [
             'binancecoinaddress' => $address,
+            'contractaddress' => $this->tokenBEP20,
             'url' => $url
         ]);
     }
