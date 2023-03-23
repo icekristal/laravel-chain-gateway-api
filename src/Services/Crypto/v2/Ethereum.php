@@ -7,17 +7,17 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-trait BSC
+trait Ethereum
 {
     /**
      * @var Repository|Application|mixed|null
      */
-    public mixed $bscUrl = null;
+    public mixed $ethereumUrl = null;
 
     /**
      * @var Repository|Application|mixed|null
      */
-    public mixed $tokenBEP20 = null;
+    public mixed $tokenERC20 = null;
 
     /**
      * Creates a new wallet
@@ -25,10 +25,10 @@ trait BSC
      * @param null $password
      * @return array
      */
-    public function createNewWalletBNB($password = null): array
+    public function createNewWalletEthereum($password = null): array
     {
         $this->pathUrl = '/addresses';
-        $newWallet = $this->sendRequest(self::TYPE_BSC, 'post',['password' => is_null($password) ? Str::random(13) : $password]);
+        $newWallet = $this->sendRequest(self::TYPE_ETHEREUM, 'post',['password' => is_null($password) ? Str::random(13) : $password]);
         Log::channel($this->channelLogWallets)->info($newWallet);
         return $newWallet;
     }
@@ -40,10 +40,10 @@ trait BSC
      * @param string $password
      * @return array
      */
-    public function deleteWalletBNB(string $address, string $password): array
+    public function deleteWalletEthereum(string $address, string $password): array
     {
         $this->pathUrl = "/addresses/{$address}";
-        $deleteWallet = $this->sendRequest(self::TYPE_BSC, 'delete',['password' => $password]);
+        $deleteWallet = $this->sendRequest(self::TYPE_ETHEREUM, 'delete',['password' => $password]);
         Log::channel($this->channelLogWallets)->info($deleteWallet);
         return $deleteWallet;
     }
@@ -54,10 +54,10 @@ trait BSC
      * @param string $address
      * @return float|int
      */
-    public function getBNBBalance(string $address): float|int
+    public function getEthereumBalance(string $address): float|int
     {
         $this->pathUrl = "/balances/{$address}";
-        return (float)$this->sendRequest(self::TYPE_BSC, 'get')['data']['balance'] ?? 0;
+        return (float)$this->sendRequest(self::TYPE_ETHEREUM, 'get')['data']['balance'] ?? 0;
     }
 
     /**
@@ -66,10 +66,10 @@ trait BSC
      * @param string $address
      * @return float|int
      */
-    public function getBEP20Balance(string $address): float|int
+    public function getERC20Balance(string $address): float|int
     {
-        $this->pathUrl = "/balances/{$address}/bep20/{$this->tokenBEP20}";
-        return (float)$this->sendRequest(self::TYPE_BSC, 'get')['data']['balance'] ?? 0;
+        $this->pathUrl = "/balances/{$address}/erc20/{$this->tokenBEP20}";
+        return (float)$this->sendRequest(self::TYPE_ETHEREUM, 'get')['data']['balance'] ?? 0;
     }
 
     /**
@@ -82,10 +82,10 @@ trait BSC
      * @param float $gas
      * @return array
      */
-    public function sendBEP20(string $from, string $privateKey, float $amount, string $to, float $gas = 0): array
+    public function sendERC20(string $from, string $privateKey, float $amount, string $to, float $gas = 0): array
     {
-        $this->pathUrl = '/transactions/bep20';
-        return $this->sendRequest(self::TYPE_BSC, 'post', [
+        $this->pathUrl = '/transactions/erc20';
+        return $this->sendRequest(self::TYPE_ETHEREUM, 'post', [
             'from' => $from,
             'contractaddress' => $this->tokenBEP20,
             'to' => $to,
@@ -104,10 +104,10 @@ trait BSC
      * @param string $to
      * @return array
      */
-    public function sendBNB(string $from, string $privateKey, float $amount, string $to): array
+    public function sendEthereum(string $from, string $privateKey, float $amount, string $to): array
     {
         $this->pathUrl = '/transactions';
-        return $this->sendRequest(self::TYPE_BSC, 'post', [
+        return $this->sendRequest(self::TYPE_ETHEREUM, 'post', [
             'from' => $from,
             'to' => $to,
             'password' => $privateKey,
@@ -122,10 +122,10 @@ trait BSC
      * @param string $url
      * @return array
      */
-    public function subscribeBNBAddress(string $address, string $url): array
+    public function subscribeEthereumAddress(string $address, string $url): array
     {
         $this->pathUrl = '/webhooks';
-        return $this->sendRequest(self::TYPE_BSC, 'post', [
+        return $this->sendRequest(self::TYPE_ETHEREUM, 'post', [
             'binancecoinaddress' => $address,
             'url' => $url
         ]);
@@ -138,10 +138,10 @@ trait BSC
      * @param string $webhookId
      * @return array
      */
-    public function unSubscribeBNBAddress(string $webhookId): array
+    public function unSubscribeEthereumAddress(string $webhookId): array
     {
         $this->pathUrl = "/webhooks/{$webhookId}";
-        return $this->sendRequest(self::TYPE_BSC, 'delete');
+        return $this->sendRequest(self::TYPE_ETHEREUM, 'delete');
     }
 
     /**
@@ -149,10 +149,10 @@ trait BSC
      *
      * @return array
      */
-    public function subscribeBNBList(): array
+    public function subscribeEthereumList(): array
     {
         $this->pathUrl = '/webhooks';
-        return $this->sendRequest(self::TYPE_BSC, 'get');
+        return $this->sendRequest(self::TYPE_ETHEREUM, 'get');
     }
 
     /**
@@ -161,10 +161,10 @@ trait BSC
      * @param string $txid
      * @return array
      */
-    public function getBNBTransaction(string $txid): array
+    public function getEthereumTransaction(string $txid): array
     {
         $this->pathUrl = "/transactions/{$txid}/decoded";
-        return $this->sendRequest(self::TYPE_BSC, 'get');
+        return $this->sendRequest(self::TYPE_ETHEREUM, 'get');
     }
 
 }

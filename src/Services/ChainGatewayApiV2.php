@@ -3,13 +3,14 @@
 namespace Icekristal\LaravelChainGatewayApi\Services;
 
 use Icekristal\LaravelChainGatewayApi\Services\Crypto\v2\BSC;
+use Icekristal\LaravelChainGatewayApi\Services\Crypto\v2\Ethereum;
 use Icekristal\LaravelChainGatewayApi\Services\Crypto\v2\Tron;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class ChainGatewayApiV2
 {
-    use Tron, BSC;
+    use Tron, BSC, Ethereum;
 
     const TYPE_TRON = 'tron';
     const TYPE_BSC = 'bsc';
@@ -38,6 +39,8 @@ class ChainGatewayApiV2
         $this->tokenTRC20 = config('services.chain_gateway.token_trc20');
         $this->bscUrl = "https://api.chaingateway.io/v2/bsc";
         $this->tokenBEP20 = config('services.chain_gateway.token_bep20');
+        $this->ethereumUrl = "https://api.chaingateway.io/v2/ethereum";
+        $this->tokenERC20 = config('services.chain_gateway.token_erc20');
 
         $this->channelLogWallets = config('services.chain_gateway.logging.channel_wallet') ?? 'single';
         $this->channelLogSended = config('services.chain_gateway.logging.channel_sended') ?? 'single';
